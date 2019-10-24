@@ -1,16 +1,10 @@
-//.submit(), preventDefault(), toggleClass(), and closest()
-//https://repl.it/@cjapedersen/fizzbuzz-solution
-//https://repl.it/@thinkful/lessimggreater-input-switches
-//https://stackoverflow.com/questions/2830542/prevent-double-submission-of-forms-in-jquery
-
-
-
-
 function addItems() {
 
     $('#js-shopping-list-form').submit(event => {
 
         console.log("Adding item");
+
+        //Prevent the submission of data to a server
         event.preventDefault();
 
         //Get the text entered by the user
@@ -20,8 +14,6 @@ function addItems() {
         //Clear the input field 
         $('#shopping-list-entry').val("");
 
-        //TODO - Why are multiple items being added to shopping list?
-            //Use off()?
         //Create empty array for building new item's html content
         let item = [];
 
@@ -49,6 +41,8 @@ function toggleItems() {
     $('.shopping-list').on('click', '.shopping-item-toggle', event => {
 
         console.log("Toggling item");
+
+        //Prevent the submission of data to a server
         event.preventDefault();
 
         //Get item that user is interacting with
@@ -63,28 +57,27 @@ function toggleItems() {
 
 function removeItems() {
 
-    //console.log("Removing item");
+    $('.shopping-list').on('click', '.shopping-item-delete', event => {
 
-    //Find the button associated with shopping-item-delete
-    //const target = $('li.shopping-item-delete').closest('');
-    //console.log("target = " + target);
+    console.log("Removing item");
 
+    //Prevent the submission of data to a server
+    event.preventDefault();
 
-    //$('ul').on('click', 'li', function(event) {
-    
-        //const target = $(event.currentTarget).closest('.shopping-item-delete');
-        //target.remove();
-        //this.remove();
-      //});
+    //Get closest grocery item that user is interacting with
+    const target = $(event.currentTarget).closest('li');
+
+    //Remove grocery item
+    target.remove();
+
+    });
 
 }
 
 function startApp() {
     addItems();
-    removeItems();
     toggleItems();
+    removeItems();
 }
-
-
 
 $(startApp);
